@@ -1,7 +1,7 @@
+import prisma from '@/lib/prismadb';
 import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/lib/auth';
-import prisma from '@/lib/prismadb';
 
 export async function POST(req: Request) {
 	const session = await getServerSession(authOptions);
@@ -15,7 +15,7 @@ export async function POST(req: Request) {
 	const authorEmail = session?.user?.email as string;
 
 	if (!title || !content) {
-		return NextResponse.json({ error: 'Title and content are required' }, { status: 500 });
+		return NextResponse.json({ error: 'Title and content are required.' }, { status: 500 });
 	}
 
 	try {
@@ -31,23 +31,17 @@ export async function POST(req: Request) {
 			},
 		});
 
-		console.log('Post created successfully');
+		console.log('Post created');
 		return NextResponse.json(newPost);
 	} catch (error) {
-		return NextResponse.json({ message: 'Could not create post' });
+		return NextResponse.json({ message: 'Could not create post.' });
 	}
 }
 
 export async function GET() {
 	try {
 		const posts = await prisma.post.findMany({
-			include: {
-				author: {
-					select: {
-						name: true,
-					},
-				},
-			},
+			include: { author: { select: { name: true } } },
 			orderBy: {
 				createdAt: 'desc',
 			},

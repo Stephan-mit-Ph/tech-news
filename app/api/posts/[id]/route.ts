@@ -20,7 +20,6 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
 	if (!session) {
 		return NextResponse.json({ error: 'Not authenticated' }, { status: 401 });
 	}
-
 	const { title, content, links, selectedCategory, imageUrl, publicId } = await req.json();
 	const id = params.id;
 
@@ -57,6 +56,6 @@ export async function DELETE(req: Request, { params }: { params: { id: string } 
 		return NextResponse.json(post);
 	} catch (error) {
 		console.log(error);
-		return NextResponse.json({ message: 'Error deleting post' });
+		return NextResponse.json({ message: 'Error deleting the post' });
 	}
 }

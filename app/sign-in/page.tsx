@@ -1,9 +1,7 @@
-import { getServerSession } from 'next-auth';
-import { redirect } from 'next/navigation';
-
+import SignInBtns from '@/components/SignInButtons';
+import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/lib/auth';
-
-import SignInButtons from '@/components/SignInButtons';
+import { redirect } from 'next/navigation';
 
 export default async function SignIn() {
 	const session = await getServerSession(authOptions);
@@ -12,5 +10,5 @@ export default async function SignIn() {
 		redirect('/dashboard');
 	}
 
-	return <SignInButtons />;
+	return <SignInBtns />;
 }

@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/lib/auth';
 import { redirect } from 'next/navigation';
-import { TPost } from '@/app/types';
+import { TPost } from '../types';
 
 const getPosts = async (email: string) => {
 	try {
